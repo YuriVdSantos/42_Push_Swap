@@ -1,65 +1,101 @@
-# Standard
-NAME				= push_swap
 
-# Directories
-LIBFT				= ./libft/libft.a
-INC					= inc/
-SRC_DIR				= srcs/
-OBJ_DIR				= obj/
+NAME		=	push_swap
 
-# Compiler and CFlags
-CC					= gcc
-CFLAGS				= -Wall -Werror -Wextra -I
-RM					= rm -f
+LIBFT		=	libft/libft.a
 
-# Source Files
-COMMANDS_DIR		=	$(SRC_DIR)commands/push.c \
-						$(SRC_DIR)commands/rev_rotate.c \
-						$(SRC_DIR)commands/rotate.c \
-						$(SRC_DIR)commands/sort_stacks.c \
-						$(SRC_DIR)commands/sort_three.c \
-						$(SRC_DIR)commands/swap.c
+ARQUIVOS	=	main.c utils.c verifications.c sorting.c \
+				push_small.c return_to_a_sorted.c moves.c moves_utils.c \
+				moves_utils_1.c push_small.c push_medium.c radix_sorting.c\
+				
+OBJETOS		=	$(ARQUIVOS:%.c=%.o)
 
-PUSH_SWAP_DIR		=	$(SRC_DIR)push_swap/handle_errors.c \
-						$(SRC_DIR)push_swap/init_a_to_b.c \
-						$(SRC_DIR)push_swap/init_b_to_a.c \
-						$(SRC_DIR)push_swap/push_swap.c \
-						$(SRC_DIR)push_swap/split.c \
-						$(SRC_DIR)push_swap/stack_init.c \
-						$(SRC_DIR)push_swap/stack_utils.c
+CFLAGS		=	-Wall -Werror -Wextra
 
-# Concatenate all source files
-SRCS 				= $(COMMANDS_DIR) $(PUSH_SWAP_DIR)
+%.o: %.c
+	cc -c $< -o $@
 
-# Apply the pattern substitution to each source file in SRC and produce a corresponding list of object files in the OBJ_DIR
-OBJ 				= $(patsubst $(SRC_DIR)%.c,$(OBJ_DIR)%.o,$(SRCS))
+all: $(NAME)
 
-# Build rules
-start:				
-					@make all
+$(NAME): $(OBJETOS) $(LIBFT)
+	cc $^ -o $@
 
 $(LIBFT):
-					@make -C ./libft
-
-all: 				$(NAME)
-
-$(NAME): 			$(OBJ) $(LIBFT)
-					@$(CC) $(CFLAGS) $(INC) $(OBJ) $(LIBFT) -o $(NAME)
-
-# Compile object files from source files
-$(OBJ_DIR)%.o:		$(SRC_DIR)%.c 
-					@mkdir -p $(@D)
-					@$(CC) $(CFLAGS) $(INC) -c $< -o $@
+	make -C libft
 
 clean:
-					@$(RM) -r $(OBJ_DIR)
-					@make clean -C ./libft
+	rm -f $(OBJETOS)
 
-fclean: 			clean
-					@$(RM) $(NAME)
-					@$(RM) $(LIBFT)
+fclean: clean
+	make fclean -C libft
+	rm -f $(NAME)
 
-re: 				fclean all
+re: fclean all
 
-# Phony targets represent actions not files
-.PHONY: 			start all clean fclean re
+test2:				$(NAME)	
+					$(eval ARG = $(shell shuf -i 0-100 -n 2))
+					@./push_swap $(ARG) | ./checker_linux $(ARG)
+					@echo -n "Instructions: "
+					@./push_swap $(ARG) | wc -l
+
+test3:				$(NAME)	
+					$(eval ARG = $(shell shuf -i 0-100 -n 3))
+					@./push_swap $(ARG) | ./checker_linux $(ARG)
+					@echo -n "Instructions: "
+					@./push_swap $(ARG) | wc -l
+
+test5:				$(NAME)	
+					$(eval ARG = $(shell shuf -i 0-5 -n 5))
+					@./push_swap $(ARG) | ./checker_linux $(ARG)
+					@echo -n "Instructions: "
+					@./push_swap $(ARG) | wc -l
+
+test25:				$(NAME)	
+					$(eval ARG = $(shell shuf -i 0-25 -n 25))
+					@./push_swap $(ARG) | ./checker_linux $(ARG)
+					@echo -n "Instructions: "
+					@./push_swap $(ARG) | wc -l
+
+test50:				$(NAME)	
+					$(eval ARG = $(shell shuf -i 0-50 -n 50))
+					valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose ./push_swap $(ARG) | ./checker_linux $(ARG)
+					@echo -n "Instructions: "
+					@./push_swap $(ARG) | wc -l
+
+test149:				$(NAME)	
+					$(eval ARG = $(shell shuf -i 0-149 -n 149))
+					@./push_swap $(ARG) | ./checker_linux $(ARG)
+					@echo -n "Instructions: "
+					@./push_swap $(ARG) | wc -l
+
+test500:			$(NAME)	
+					$(eval ARG = $(shell seq -500 500 | shuf | head -n 500))
+					./push_swap $(ARG) | ./checker_linux $(ARG)
+					@echo -n "Instructions: "
+					@./push_swap $(ARG) | wc -l
+
+test100:			$(NAME)	
+					$(eval ARG = $(shell shuf -i 0-5000 -n 100))
+					@./push_swap $(ARG) | ./checker_linux $(ARG)
+					@echo -n "Instructions: "
+					@./push_swap $(ARG) | wc -l
+
+test150:			$(NAME)	
+					$(eval ARG = $(shell shuf -i 0-150 -n 150))
+					@./push_swap $(ARG) | ./checker_linux $(ARG)
+					@echo -n "Instructions: "
+					@./push_swap $(ARG) | wc -l
+
+test200:			$(NAME)	
+					$(eval ARG = $(shell shuf -i 0-200 -n 200))
+					@./push_swap $(ARG) | ./checker_linux $(ARG)
+					@echo -n "Instructions: "
+					@./push_swap $(ARG) | wc -l
+
+test1000:			$(NAME)	
+					$(eval ARG = $(shell shuf -i 0-5000 -n 1000))
+					@./push_swap $(ARG) | ./checker_linux $(ARG)
+					@echo -n "Instructions: "
+					@./push_swap $(ARG) | wc -l
+
+
+.PHONY: all clean fclean re test2 test3 test500 test1000 test5 test100
