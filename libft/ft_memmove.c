@@ -1,36 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/13 21:35:29 by yvieira-          #+#    #+#             */
-/*   Updated: 2025/02/22 15:44:56 by yvieira-         ###   ########.fr       */
+/*   Created: 2024/10/17 13:36:58 by yvieira-          #+#    #+#             */
+/*   Updated: 2025/01/20 18:38:48 by yvieira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	t_stack_node	*a;
-	t_stack_node	*b;
+	size_t				i;
+	unsigned char		*ptr_dest;
+	const unsigned char	*ptr_src;
 
-	a = NULL;
-	b = NULL;
-	if (argc == 1 || (argc == 2 && !argv[1][0]))
-		return (1);
-	init_stack_a(&a, argv +1);
-	if (!stack_sorted(a))
+	ptr_dest = (unsigned char *)dest;
+	ptr_src = (const unsigned char *)src;
+	i = 0;
+	if (ptr_dest < ptr_src)
 	{
-		if (stack_len(a) == 2)
-			sa(&a, false);
-		else if (stack_len(a) == 3)
-			sort_three(&a);
-		else
-			sort_stacks(&a, &b);
+		while (i < n)
+		{
+			ptr_dest[i] = ptr_src[i];
+			i++;
+		}
 	}
-	free_stack(&a);
-	return (0);
+	else
+	{
+		while (n > 0)
+		{
+			ptr_dest[n - 1] = ptr_src[n - 1];
+			n--;
+		}
+	}
+	return (dest);
 }

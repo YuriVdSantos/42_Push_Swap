@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_three.c                                       :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/13 21:36:49 by yvieira-          #+#    #+#             */
-/*   Updated: 2025/02/13 21:36:51 by yvieira-         ###   ########.fr       */
+/*   Created: 2024/10/16 16:08:48 by yvieira-          #+#    #+#             */
+/*   Updated: 2024/10/28 18:24:59 by yvieira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	sort_three(t_stack_node **a)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	t_stack_node	*biggest_node;
+	size_t	i;
 
-	biggest_node = find_max(*a);
-	if (biggest_node == *a)
-		ra(a, false);
-	else if ((*a)->next == biggest_node)
-		rra(a, false);
-	if ((*a)->nbr > (*a)->next->nbr)
-		sa(a, false);
+	if (dstsize == 0)
+		return (ft_strlen(src));
+	i = 0;
+	while (i < dstsize - 1 && src[i] != '\0')
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = '\0';
+	return (ft_strlen(src));
 }

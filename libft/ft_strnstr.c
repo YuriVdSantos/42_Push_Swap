@@ -1,36 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/13 21:35:29 by yvieira-          #+#    #+#             */
-/*   Updated: 2025/02/22 15:44:56 by yvieira-         ###   ########.fr       */
+/*   Created: 2024/08/29 14:25:10 by yvieira-          #+#    #+#             */
+/*   Updated: 2024/10/28 18:44:03 by yvieira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+char	*ft_strnstr(const char *str, const char *to_find, size_t n)
 {
-	t_stack_node	*a;
-	t_stack_node	*b;
+	size_t	i;
+	size_t	j;
 
-	a = NULL;
-	b = NULL;
-	if (argc == 1 || (argc == 2 && !argv[1][0]))
-		return (1);
-	init_stack_a(&a, argv +1);
-	if (!stack_sorted(a))
+	if (to_find[0] == '\0')
+		return ((char *)str);
+	i = 0;
+	while (str[i] != '\0' && i < n)
 	{
-		if (stack_len(a) == 2)
-			sa(&a, false);
-		else if (stack_len(a) == 3)
-			sort_three(&a);
-		else
-			sort_stacks(&a, &b);
+		j = 0;
+		while (to_find[j] != '\0' && str[i + j] != '\0' && i + j < n)
+		{
+			if (str[i + j] != to_find[j])
+			{
+				break ;
+			}
+			j++;
+		}
+		if (to_find[j] == '\0')
+			return ((char *)&str[i]);
+		i++;
 	}
-	free_stack(&a);
-	return (0);
+	return (NULL);
 }

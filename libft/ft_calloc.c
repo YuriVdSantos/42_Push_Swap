@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_three.c                                       :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/13 21:36:49 by yvieira-          #+#    #+#             */
-/*   Updated: 2025/02/13 21:36:51 by yvieira-         ###   ########.fr       */
+/*   Created: 2024/10/24 14:16:26 by yvieira-          #+#    #+#             */
+/*   Updated: 2024/10/28 17:59:16 by yvieira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	sort_three(t_stack_node **a)
+void	*ft_calloc(size_t count, size_t size)
 {
-	t_stack_node	*biggest_node;
+	void	*ptr;
 
-	biggest_node = find_max(*a);
-	if (biggest_node == *a)
-		ra(a, false);
-	else if ((*a)->next == biggest_node)
-		rra(a, false);
-	if ((*a)->nbr > (*a)->next->nbr)
-		sa(a, false);
+	if (count == 0 || size == 0)
+		return (malloc(0));
+	ptr = malloc(count * size);
+	if (!ptr)
+		return (NULL);
+	ft_bzero(ptr, count * size);
+	return (ptr);
 }

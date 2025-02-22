@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_three.c                                       :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/13 21:36:49 by yvieira-          #+#    #+#             */
-/*   Updated: 2025/02/13 21:36:51 by yvieira-         ###   ########.fr       */
+/*   Created: 2024/10/15 11:35:32 by yvieira-          #+#    #+#             */
+/*   Updated: 2024/10/25 17:34:54 by yvieira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	sort_three(t_stack_node **a)
+int	ft_isdigit(int ch)
 {
-	t_stack_node	*biggest_node;
-
-	biggest_node = find_max(*a);
-	if (biggest_node == *a)
-		ra(a, false);
-	else if ((*a)->next == biggest_node)
-		rra(a, false);
-	if ((*a)->nbr > (*a)->next->nbr)
-		sa(a, false);
+	if (!(ch >= '0' && ch <= '9'))
+	{
+		return (0);
+	}
+	return (1);
 }

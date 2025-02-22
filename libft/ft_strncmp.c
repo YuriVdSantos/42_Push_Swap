@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_three.c                                       :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/13 21:36:49 by yvieira-          #+#    #+#             */
-/*   Updated: 2025/02/13 21:36:51 by yvieira-         ###   ########.fr       */
+/*   Created: 2024/10/15 11:51:56 by yvieira-          #+#    #+#             */
+/*   Updated: 2024/10/28 17:54:51 by yvieira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	sort_three(t_stack_node **a)
+int	ft_strncmp(const char *str1, const char *str2, size_t n)
 {
-	t_stack_node	*biggest_node;
+	size_t	i;
 
-	biggest_node = find_max(*a);
-	if (biggest_node == *a)
-		ra(a, false);
-	else if ((*a)->next == biggest_node)
-		rra(a, false);
-	if ((*a)->nbr > (*a)->next->nbr)
-		sa(a, false);
+	i = 0;
+	while (i < n)
+	{
+		if (str1[i] != str2[i])
+		{
+			return ((unsigned char)str1[i] - (unsigned char)str2[i]);
+		}
+		if (str1[i] == '\0')
+		{
+			return (0);
+		}
+		i++;
+	}
+	return (0);
 }

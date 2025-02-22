@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_three.c                                       :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/13 21:36:49 by yvieira-          #+#    #+#             */
-/*   Updated: 2025/02/13 21:36:51 by yvieira-         ###   ########.fr       */
+/*   Created: 2024/10/16 16:51:02 by yvieira-          #+#    #+#             */
+/*   Updated: 2024/10/28 18:30:43 by yvieira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	sort_three(t_stack_node **a)
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
-	t_stack_node	*biggest_node;
+	size_t	dst_len;
+	size_t	src_len;
+	size_t	to_copy;
 
-	biggest_node = find_max(*a);
-	if (biggest_node == *a)
-		ra(a, false);
-	else if ((*a)->next == biggest_node)
-		rra(a, false);
-	if ((*a)->nbr > (*a)->next->nbr)
-		sa(a, false);
+	dst_len = ft_strlen(dst);
+	src_len = ft_strlen(src);
+	if (dst_len >= dstsize)
+		return (dstsize + src_len);
+	to_copy = dstsize - dst_len - 1;
+	if (to_copy > src_len)
+		to_copy = src_len;
+	ft_strlcpy(dst + dst_len, src, to_copy + 1);
+	return (dst_len + src_len);
 }

@@ -1,12 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rotate.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/13 21:34:16 by yvieira-          #+#    #+#             */
+/*   Updated: 2025/02/13 21:34:51 by yvieira-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 static void	rotate(t_stack_node **stack)
 {
 	t_stack_node	*last_node;
 
-	if (!*stack || !(*stack)->next) 
+	if (!*stack || !(*stack)->next)
 		return ;
-	last_node = find_last(*stack); 
+	last_node = find_last(*stack);
 	last_node->next = *stack;
 	*stack = (*stack)->next;
 	(*stack)->prev = NULL;
